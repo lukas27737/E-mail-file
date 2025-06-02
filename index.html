@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zadej svůj e-mail</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://i.imgur.com/WH9kypL.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      padding: 2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    form {
+      background: rgba(255,255,255,0.9);
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1em;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7em 1.5em;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .error {
+      color: red;
+      margin-bottom: 1em;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <form id="emailForm" novalidate>
+    <h2>Zadej svůj e-mail</h2>
+    <div id="message" class="error"></div>
+    <input type="email" id="email" placeholder="tvuj@email.cz" required />
+    <input type="submit" value="Odeslat" />
+  </form>
+
+  <script>
+    const form = document.getElementById('emailForm');
+    const emailInput = document.getElementById('email');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = emailInput.value.trim();
+
+      // Jednoduchá kontrola emailu pomocí regulárního výrazu
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        message.textContent = 'Zadej platnou e-mailovou adresu!';
+        emailInput.focus();
+      } else {
+        message.textContent = '';
+        form.innerHTML = '<p class="success">Děkujeme, váš e-mail byl přijat!</p>';
+        // Tady můžeš přidat kód pro uložení e-mailu (např. odeslání na server)
+      }
+    });
+  </script>
+</body>
+</html>
